@@ -7,7 +7,7 @@ function omikuji($number){
         case (4<=$number && $number<=6) : echo "中吉"; break;
         case (7<=$number && $number<=8) : echo "吉"  ; break;
         case (9) : echo "大吉"; break;
-        default :echo "error";
+        default :echo "申し訳ありません。もう一度入力してください。";
     }
 }
     //フォームの受け取り
@@ -26,9 +26,7 @@ function omikuji($number){
         printf("%sの運勢は<br>選ばれた数字は%d<br>",date("Y/m/d", time()),$number[$order]);
         //選ばれた順番を引数にしておみくじの関数を呼び出す。
         echo omikuji($number[$order]);
-       
-
-    }else{
+        }else{
         //0~9以外の文字が入力されたときの処理
         echo "0~9の好きな数字の羅列を入力してください。";    
     }
