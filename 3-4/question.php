@@ -3,9 +3,9 @@
 //POST送信で送られてきた名前を受け取って変数を作成
 $user_name = $_POST["user_name"];
 //①画像を参考に問題文の選択肢の配列を作成してください。
-$port_array = ["80","22","20","21"] ; //問題１ ポート番号
-$lang_array = ["PHP","Python","JAVA","HTML"]; //問題２ webページを作成するための言語
-$cmd_array = ["join","select","insert","update"]; //問題３ MySQLで情報を取得するためのコマンド
+$port_array = ["未選択","80","22","20","21"] ; //問題１ ポート番号
+$lang_array = ["未選択","PHP","Python","JAVA","HTML"]; //問題２ webページを作成するための言語
+$cmd_array = ["未選択","join","select","insert","update"]; //問題３ MySQLで情報を取得するためのコマンド
 
 //② ①で作成した、配列から正解の選択肢の変数を作成してください
 $port_answer = "80"; //$_SERVER['SERVER_PORT']で確認
@@ -22,7 +22,7 @@ $cmd_answer = "select"; //問題３ MuSQLで情報を取得するためのコマ
     <!--③ 問題のradioボタンを「foreach」を使って作成する-->
     <div style="text-align:center;color:white"> 
         <?php foreach($port_array as $value) { ?>
-            <input type="radio" name="port_num" value="<?= $value ?>"<?php if ($value == "80") { echo "checked"; } ?>/><?= $value; ?>
+            <input type="radio" name="port_num" value="<?= $value ?>"<?php if ($value == "未選択") { echo "checked"; } ?>/><?= $value; ?>
         <?php } ?>
     </div>
 
@@ -30,14 +30,14 @@ $cmd_answer = "select"; //問題３ MuSQLで情報を取得するためのコマ
     <!--③ 問題のradioボタンを「foreach」を使って作成する-->
     <div style="text-align:center;color:white">
         <?php foreach($lang_array as $value) { ?>
-            <input type="radio" name="lang_web" value="<?= $value ?>"<?php if ($value == "PHP") { echo "checked"; } ?>/><?= $value; ?>
+            <input type="radio" name="lang_web" value="<?= $value ?>"<?php if ($value == "未選択") { echo "checked"; } ?>/><?= $value; ?>
     <?php } ?>
 
     <h2>③MySQLで情報を取得するためのコマンドは？</h2>
     <!--③ 問題のradioボタンを「foreach」を使って作成する-->
     <div style="text-align:center;color:white">
         <?php foreach($cmd_array as $value) { ?>
-            <input type="radio" name="cmd_MySQL" value="<?= $value ?>"<?php if ($value == "join") { echo "checked"; } ?>/><?= $value; ?>
+            <input type="radio" name="cmd_MySQL" value="<?= $value ?>"<?php if ($value == "未選択") { echo "checked"; } ?>/><?= $value; ?>
     <?php } ?>
 
     <!--問題の正解の変数と名前の変数を[answer.php]に送る-->

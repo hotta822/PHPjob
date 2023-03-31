@@ -28,3 +28,9 @@ function judgment($selection,$answer){
 <p>③の答え</p>
 <!--作成した関数を呼び出して結果を表示-->
 <p><?php judgment($cmd_MySQL,$cmd_answer);?></p>
+
+<p><?php
+if($port_num==$port_answer && $lang_web==$lang_answer && $cmd_MySQL==$cmd_answer){
+    echo "おめでとうございます。全問正解です！";
+}
+?></p>
