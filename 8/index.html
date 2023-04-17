@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            font-size: 1.5em;
+            text-align: center;
+        }
+        th, td {
+            padding : 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <!--selectタグにidを追加してgetElementIdで取得できるようにする-->
+    <select id="choices" onchange="changeLang()">
+        <option id="select">選択してください</option>
+        <option id="selected_jpn">日本語</option>
+        <option id="selected_en">English</option>
+        <option id="selected_all">全て表示</option>
+    </select>
+    <table id="table_default">
+        <tr>
+            <th>日本</th>
+            <td>こんにちは</td>
+            <td>ありがとう</td>
+            <td>さようなら</td>
+        </tr>
+        <tr>
+            <th>English</th>
+            <td>Hello</td>
+            <td>Thank you</td>
+            <td>Good Bye</td>
+        </tr>
+    </table>
+    
+
+    <script>
+        //①onchangeで使用されている関数の中身を実装してください。
+        function changeLang(){
+            let choices = document.getElementById("choices");
+            //選択されたidを取得
+            let selected_choice = choices.options[choices.selectedIndex].id;
+            let table_default = document.getElementById("table_default"); //最初に表示されているテキストを取得
+            //最初に表示されているtableとは別に２つのtableを作成してそれぞれに日本語、英語のテキストを入れる。
+            //その２つのtable1,2をdisplayで表示、非表示を切り替える
+            let table1 = document.getElementById("jpn");
+            let table2 = document.getElementById("en");
+            if(table1){//table1に日本語のtableがあるかを確認して、なければ作る
+                table1.style.display = "none";
+            }else{
+                table1 = jpnTable();
+                table1.style.display = "none";
+            }
+            if(table2){//table2に英語のtableがあるかを確認して、なければ作る
+                table2.style.display = "none";
+            }else{
+                table2 = enTable();
+                table2.style.display = "none";
+            }   
+
+            switch (selected_choice){ 
+                case "select":
+                    table1.style.display = "none";
+                    table2.style.display = "none";
+                    table_default.style.display = "block";
+                    break;
+                case "selected_jpn" :
+                    table_default.style.display = "none";
+                    table1.style.display = "block";
+                    break;
+                case "selected_en" :
+                    table_default.style.display = "none";
+                    table2.style.display = "block";
+                    break;
+                case "selected_all" : 
+                    table_default.style.display = "none";
+                    table1.style.display = "block";
+                    table2.style.display = "block";
+                    break;
+                default : alert("エラーが発生しました");
+                }
+            }
+            function createTable(){
+                //table>tr>th+td
+                let body = document.getElementsByTagName("body")[0];
+                let new_table = document.createElement("table");
+                let tr = document.createElement("tr");
+                let th = document.createElement("th");
+                tr.appendChild(th);//作成した
+                //ループ tr>td*3
+                for(let i=1;i<=3;i++){
+                    let td = document.createElement("td");
+                    tr.appendChild(td);
+                }
+                
+                new_table.appendChild(tr);
+                body.appendChild(new_table);
+
+                return new_table;
+            }
+            function jpnTable(){
+                let table_jpn = createTable();
+                table_jpn.setAttribute("id","jpn");
+                const th_jpn = table_jpn.getElementsByTagName("th")[0];
+                th_jpn.innerText = "日本";
+                const japanese = ["こんにちは","ありがとう","さようなら"];
+                const tds_jpn = table_jpn.getElementsByTagName("td");
+                for(let i=0;i<tds_jpn.length;i++){
+                    tds_jpn[i].innerText = japanese[i];
+                }
+                return table_jpn;
+            }
+            function enTable(){
+                let table_en = createTable();
+                table_en.setAttribute("id","en");
+                const th_en = table_en.getElementsByTagName("th")[0];
+                th_en.innerText = "English";
+                const English = ["Hello","Thank you","Good Bye"];
+                const tds_en = table_en.getElementsByTagName("td");
+                for(let i=0;i<tds_en.length;i++){
+                    tds_en[i].innerText = English[i];
+                }
+                return table_en;
+            }    
+    </script>
+</body>
+</html>
